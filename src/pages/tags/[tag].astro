@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import BlogPost from "../../components/BlogPost.astro";
 
 export async function getStaticPaths() {
   // There is a way to type this: https://docs.astro.build/en/guides/imports/#markdown-files
@@ -21,4 +22,8 @@ const filteredPosts = posts.filter((post: any) => post.frontmatter.tags?.include
 ---
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
+  <ul>
+    {filteredPosts.map((post: any) =>
+            <BlogPost url={post.url} title={post.frontmatter.title}/>)}
+  </ul>
 </BaseLayout>
